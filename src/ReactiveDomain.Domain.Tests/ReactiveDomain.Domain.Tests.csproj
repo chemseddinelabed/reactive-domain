@@ -1,7 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+    <TargetFramework>net462</TargetFramework>
+    <Platforms>x64</Platforms>    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Unix'">
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
   <PropertyGroup>
     <AssemblyName>ReactiveDomain.Domain.Tests</AssemblyName>
-    <TargetFramework>net462</TargetFramework>
     <Title>ReactiveDomain.Domain.Tests</Title>
     <Authors>Yves Reynhout;Christopher Condron</Authors>
     <Description>This package contains the tests for the core types to use when building an event sourced model in C#.</Description>
@@ -9,9 +15,11 @@
   <ItemGroup>
     <PackageReference Include="AutoFixture.Idioms" Version="4.0.0-rc1" />
     <PackageReference Include="CompareNetObjects" Version="3.9.0" />
+    <PackageReference Include="Docker.DotNet" Version="3.125.0"  Condition="'$(TargetFramework)'=='netcoreapp2.0'"/>
     <PackageReference Include="EventStore.Client" Version="4.1.0" Condition="'$(TargetFramework)'=='net462'"/>
     <PackageReference Include="EventStore.Client.Embedded" Version="4.1.0" Condition="'$(TargetFramework)'=='net462'" />
-    <PackageReference Include="EventStore.ClientAPI.NetCore" Version="4.0.3-rc" Condition="'$(TargetFramework)'=='netstandard2.0'"/>
+    <PackageReference Include="EventStore.ClientAPI.NetCore" Version="4.0.3-rc" Condition="'$(TargetFramework)'=='netcoreapp2.0'"/>
+    <PackageReference Include="AutoFixture.Idioms" Version="4.0.0-rc1" />
     <PackageReference Include="FluentValidation" Version="7.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="XUnit" Version="2.3.1" />

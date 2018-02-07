@@ -2,12 +2,11 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using EventStore.ClientAPI;
+#if NET462
 using EventStore.ClientAPI.Embedded;
 using EventStore.Core;
-#if NET462
-
 #endif
-#if NETCOREAPP2_0 || NETSTANDARD2_0
+#if NETCOREAPP2_0
 using System.Collections.Generic;
 using System.Linq;
 using EventStore.ClientAPI.SystemData;
@@ -65,7 +64,7 @@ namespace ReactiveDomain.Domain.Tests
             }
         }
     }
-#elif NETCOREAPP2_0 || NETSTANDARD2_0
+#elif NETCOREAPP2_0
     public class EmbeddedEventStoreFixture : IAsyncLifetime
     {
         private int _suffix;

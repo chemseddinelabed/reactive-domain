@@ -1,8 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+    <TargetFramework>net462</TargetFramework>
+    <Platforms>x64</Platforms>    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Unix'">
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>ReactiveDomain</RootNamespace>
     <AssemblyName>ReactiveDomain.Domain</AssemblyName>
-    <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <Authors>Yves Reynhout;Christopher Condron</Authors>
     <Description>This package contains the core types to use when building an event sourced model in C#.</Description>
     <IsPackable>true</IsPackable>

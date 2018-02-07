@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET462
+using System;
 using System.Collections.Generic;
 using ReactiveDomain.Messaging;
 using ReactiveDomain.Messaging.Bus;
@@ -61,4 +62,4 @@ namespace ReactiveDomain.Foundation
         }
     }
 }
-
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET462
+using System;
 using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 
@@ -53,3 +54,4 @@ namespace ReactiveDomain.Foundation
         }
     }
 }
+#endif

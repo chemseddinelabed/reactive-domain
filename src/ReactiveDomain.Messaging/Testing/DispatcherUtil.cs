@@ -1,5 +1,9 @@
 ﻿using System.Security.Permissions;
+#if NET462
 using System.Windows.Threading;
+#elif NETSTANDARD2_0
+using System;
+#endif
 
 namespace ReactiveDomain.Messaging.Testing
 {
@@ -16,18 +20,24 @@ namespace ReactiveDomain.Messaging.Testing
         [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public static void DoEvents()
         {
+#if NET462
             var frame = new DispatcherFrame();
             Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background,
                 new DispatcherOperationCallback(ExitFrame), frame);
             Dispatcher.PushFrame(frame);
+#elif NETSTANDARD2_0
+            throw new PlatformNotSupportedException();
+#endif
         }
 
         private static object ExitFrame(object frame)
         {
+#if NET462
             ((DispatcherFrame)frame).Continue = false;
             return null;
+#elif NETSTANDARD2_0
+            throw new PlatformNotSupportedException();
+#endif
         }
-
-
     }
 }

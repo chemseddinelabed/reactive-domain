@@ -1,8 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
     <TargetFramework>net462</TargetFramework>
-    <Platforms>x64</Platforms>
+    <Platforms>x64</Platforms>    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Unix'">
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
     <Version>0.8.2.0</Version>
     <Authors>PerkinElmer</Authors>
     <Company>PerkinElmer</Company>
@@ -15,12 +19,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="EventStore.Client" Version="4.1.0" />
-    <PackageReference Include="EventStore.Client.Embedded" Version="4.1.0" />
+    <PackageReference Include="Docker.DotNet" Version="3.125.0"  Condition="'$(TargetFramework)'=='netcoreapp2.0'"/>
+    <PackageReference Include="EventStore.Client" Version="4.1.0" Condition="'$(TargetFramework)'=='net462'"/>
+    <PackageReference Include="EventStore.Client.Embedded" Version="4.1.0" Condition="'$(TargetFramework)'=='net462'" />
+    <PackageReference Include="EventStore.ClientAPI.NetCore" Version="4.0.3-rc" Condition="'$(TargetFramework)'=='netcoreapp2.0'"/>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="xunit.core" Version="2.3.1" />
     <PackageReference Include="xunit.runner.console" Version="2.3.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" Condition="'$(TargetFramework)'=='net462'" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReactiveDomain.Domain\ReactiveDomain.Domain.csproj" />

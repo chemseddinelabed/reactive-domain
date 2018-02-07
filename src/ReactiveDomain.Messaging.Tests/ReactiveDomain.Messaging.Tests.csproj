@@ -1,8 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
     <TargetFramework>net462</TargetFramework>
-    <Platforms>x64</Platforms>
+    <Platforms>x64</Platforms>    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Unix'">
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RuntimeFrameworkVersion>2.0.5</RuntimeFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup>
     <Version>0.8.2.0</Version>
     <Authors>PerkinElmer</Authors>
     <Company>PerkinElmer</Company>
@@ -17,13 +22,14 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="xunit.core" Version="2.3.1" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReactiveDomain.Messaging\ReactiveDomain.Messaging.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsBase" Condition=" '$(TargetFramework)' == 'net462' "/>
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutputPath>..\..\bld\Debug</OutputPath>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET462
+using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -54,3 +55,4 @@ namespace ReactiveDomain.Foundation.ReadModel
         }
     }
 }
+#endif
